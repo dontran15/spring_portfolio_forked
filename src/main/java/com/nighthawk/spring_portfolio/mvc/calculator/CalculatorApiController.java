@@ -26,7 +26,7 @@ public class CalculatorApiController {
             Calculator calculatedExpression = new Calculator(expression);
             // Turn Year Object into JSON
             JsonNode json = mapper.readTree(calculatedExpression.toString());
-            return new ResponseEntity<>(json, HttpStatus.ACCEPTED);
+            return new ResponseEntity<>(json, HttpStatus.OK);
         } catch (RuntimeException e) {
             JsonNode json = mapper.readTree(e.getMessage());
             return new ResponseEntity<>(json, HttpStatus.BAD_REQUEST);
