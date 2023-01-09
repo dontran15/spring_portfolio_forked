@@ -14,4 +14,4 @@ volumes:
     driver_opts:
       o: bind
       type: none
-      device: /home/ubuntu/t4_tri2_spring_8102/volumes
+      device: /home/ubuntu/tri2_t4_f1_8102/volumes
