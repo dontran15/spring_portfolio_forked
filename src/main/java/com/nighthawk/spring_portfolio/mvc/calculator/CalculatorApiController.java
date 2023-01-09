@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/calculator")
 public class CalculatorApiController {
-    @GetMapping("/calculate")
+    @PostMapping("/calculate")
     public ResponseEntity<String> calculate(@RequestBody final String expression) {
         try {
             Calculator calculatedExpression = new Calculator(expression);
