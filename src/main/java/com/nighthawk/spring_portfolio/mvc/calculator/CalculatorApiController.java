@@ -31,7 +31,7 @@ public class CalculatorApiController {
             JsonNode json = mapper.readTree(e.getMessage());
             return new ResponseEntity<>(json, HttpStatus.BAD_REQUEST);
         } catch (Exception e) {
-            JsonNode json = mapper.readTree("{ \"error\": Internal Error/Parsing Error, check your expression}");
+            JsonNode json = mapper.readTree("{ \"error\": Internal Error/Parsing Error, check your expression }");
             return new ResponseEntity<>(json, HttpStatus.BAD_REQUEST);
         }
     }
