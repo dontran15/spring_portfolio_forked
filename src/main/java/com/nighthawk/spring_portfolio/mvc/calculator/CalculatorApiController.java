@@ -2,24 +2,37 @@ package com.nighthawk.spring_portfolio.mvc.calculator;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 // Calculator api, endpoint: /api/calculator/
 @RestController
 @RequestMapping("/api/calculator")
 public class CalculatorApiController {
-    @PostMapping("/calculate")
-    public ResponseEntity<String> calculate(@RequestBody final String expression) {
+    @GetMapping("/{expression}")
+    public ResponseEntity<JsonNode> calculate(@PathVariable String expression)
+            throws JsonMappingException, JsonProcessingException {
+
+        ObjectMapper mapper = new ObjectMapper();
+
         try {
             Calculator calculatedExpression = new Calculator(expression);
-            return new ResponseEntity<>(calculatedExpression.toString(), HttpStatus.ACCEPTED);
+            // Turn Year Object into JSON
+            JsonNode json = mapper.readTree(calculatedExpression.toString());
+            return new ResponseEntity<>(json, HttpStatus.ACCEPTED);
         } catch (RuntimeException e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+            JsonNode json = mapper.readTree(e.getMessage());
+            return new ResponseEntity<>(json, HttpStatus.BAD_REQUEST);
         } catch (Exception e) {
-            return new ResponseEntity<>("Internal Error/Parsing Error, check your expression", HttpStatus.BAD_REQUEST);
+            JsonNode json = mapper.readTree("{ \"error\": Internal Error/Parsing Error, check your expression}");
+            return new ResponseEntity<>(json, HttpStatus.BAD_REQUEST);
         }
     }
 }
