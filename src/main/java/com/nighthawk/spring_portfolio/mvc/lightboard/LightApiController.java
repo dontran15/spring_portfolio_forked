@@ -1,7 +1,7 @@
 package com.nighthawk.spring_portfolio.mvc.lightboard;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,7 +14,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @RestController
 @RequestMapping("/api/lightboard")
 public class LightApiController {
-    @PostMapping("/")
+    @GetMapping("/")
     public ResponseEntity<JsonNode> getLightBoard(@RequestParam int numRows, @RequestParam int numCols,
             @RequestParam double percentLightsOff)
             throws JsonMappingException, JsonProcessingException {
