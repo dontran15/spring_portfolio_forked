@@ -71,7 +71,7 @@ public class Calculator {
         }
 
         if (leftParentheses != rightParentheses) {
-            throw new RuntimeException("Parentheses imbalance, check your parentheses.");
+            throw new RuntimeException("{ \"Error\": Parentheses imbalance, check your parentheses. }");
         }
     }
 
@@ -229,10 +229,10 @@ public class Calculator {
 
     // Print the expression, terms, and result
     public String toString() {
-        return ("Original expression: " + this.expression + "\n" +
-                "Tokenized expression: " + this.tokens.toString() + "\n" +
-                "Reverse Polish Notation: " + this.reverse_polish.toString() + "\n" +
-                "Final result: " + String.format("%.2f", this.result));
+        return ("{ \"expression\": " + this.expression + ", " +
+                "\"tokens\": " + this.tokens.toString() + ", " +
+                "\"rpn\": " + this.reverse_polish.toString() + ", " +
+                "\"result\": " + String.format("%.2f", this.result)) + " }";
     }
 
     // Tester method
