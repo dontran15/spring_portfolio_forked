@@ -17,7 +17,7 @@ jobs:
           key: ${{ secrets.KEY }}
           port: ${{ secrets.PORT }}
           script: |
-            cd /home/${{ secrets.USERNAME }}/t4_tri2_spring
+            cd /home/${{ secrets.USERNAME }}/tri2_t4_f1_8102
             sudo docker-compose down
             git pull
             sudo docker-compose up -d --build
